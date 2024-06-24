@@ -26,6 +26,7 @@ app.post('/leads', (req, res) => {
 
 app.post('/freetrial', (req, res) => {
   // Handle the incoming data from Make.com and send it to the frontend
+  console.log('free trial route hit')
   console.log('req. body', req.body)
   retrievedValue = req.body.value;
   console.log('value', retrievedValue)
