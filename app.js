@@ -22,6 +22,14 @@ app.post('/leads', (req, res) => {
   res.send('Lead received');
 });
 
+app.post('/freetrial', (req, res) => {
+  // Handle the incoming data from Make.com and send it to the frontend
+  console.log('req. body', req.body)
+  const { value } = req.body;
+  console.log('value', value)
+  res.json({ value });
+});
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
