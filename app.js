@@ -11,6 +11,8 @@ app.use(bodyParser.json());
 // Middleware to handle CORS
 app.use(cors());
 
+let retrievedValue = null;
+
 // GET route for '/'
 app.get('/', (req, res) => {
   res.send('Hello from leads app');
@@ -25,9 +27,19 @@ app.post('/leads', (req, res) => {
 app.post('/freetrial', (req, res) => {
   // Handle the incoming data from Make.com and send it to the frontend
   console.log('req. body', req.body)
-  const { value } = req.body;
-  console.log('value', value)
-  res.json({ value });
+  retrievedValue = req.body.value;
+  console.log('value', retrievedValue)
+  res.json({ success: true });
+});
+
+app.get('/freetrial', (req, res) => {
+  // Send the stored value back to the frontend
+  if (retrievedValue) {
+    res.json({ value: retrievedValue });
+    retrievedValue = null; // Reset the value after sending
+  } else {
+    res.json({ value: null });
+  }
 });
 
 // Start the server
